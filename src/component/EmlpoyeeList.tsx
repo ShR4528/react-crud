@@ -6,20 +6,18 @@ import { useState } from "react"
 type Props = {
   list: IEmployee[]
   onDeleteClickHnd: (data: IEmployee) => void
+  onEdit: (data: IEmployee) => void
 }
 
 function EmployeeList(props: Props) {
-  const { list, onDeleteClickHnd } = props
+  const { list, onDeleteClickHnd, onEdit } = props
   const [showModal, setShowModal] = useState(false)
-  const [editModal, setEditModal] = useState(false)
+
   const [dataToShow, setDataToShow] = useState(null as IEmployee | null)
 
   const viewEmployee = (data: IEmployee) => {
     setDataToShow(data)
     setShowModal(true)
-  }
-  const editEmployee = () => {
-    setEditModal(true)
   }
 
   const onCloseModal = () => setShowModal(false)
@@ -50,7 +48,7 @@ function EmployeeList(props: Props) {
                   <input
                     type="button"
                     value="Edit"
-                    onClick={() => editEmployee()}
+                    onClick={() => onEdit(employee)}
                   />
                   <input
                     type="button"
